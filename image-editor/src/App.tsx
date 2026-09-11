@@ -10,7 +10,6 @@ function App() {
   const historyRef = useRef<string[]>([]);
 
   const [history, setHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const [cropMode, setCropMode] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -38,7 +37,6 @@ function App() {
     const newIndex = newHistory.length - 1;
 
     historyIndexRef.current = newIndex;
-    setHistoryIndex(newIndex);
   };
 
   //handle rotate
@@ -142,7 +140,6 @@ function App() {
 
     canvas.requestRenderAll();
 
-    setHistoryIndex(newIndex);
     historyIndexRef.current = newIndex;
   };
 
@@ -162,7 +159,6 @@ function App() {
 
     canvas.requestRenderAll();
 
-    setHistoryIndex(newIndex);
     historyIndexRef.current = newIndex;
   };
 
@@ -429,7 +425,6 @@ function App() {
     historyRef.current = [initialState];
 
     setHistory([initialState]);
-    setHistoryIndex(0);
     historyIndexRef.current = 0;
 
     const handleObjectModified = () => {
