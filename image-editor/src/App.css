@@ -1,0 +1,354 @@
+/* ── CSS Variables ───────────────────────────────────────── */
+.dark {
+  --bg-app:        #13131f;
+  --bg-navbar:     #1a1a2e;
+  --bg-sidebar:    #1e1e30;
+  --bg-sidebar-hover: #2a2a40;
+  --bg-sidebar-active: #32324e;
+  --bg-editor:     #1a1a28;
+  --bg-canvas:     #ffffff;
+
+  --border-subtle: #2a2a40;
+  --border-btn:    transparent;
+
+  --text-brand:    #818cf8;
+  --text-nav:      #e2e8f0;
+  --text-label:    #4b5563;
+  --text-btn:      #94a3b8;
+  --text-btn-hover:#e2e8f0;
+
+  --accent-blue:   #6366f1;
+  --accent-blue-soft: rgba(99, 102, 241, 0.12);
+  --accent-blue-border: rgba(99, 102, 241, 0.35);
+
+  --green:         #34d399;
+  --green-soft:    rgba(52, 211, 153, 0.1);
+  --green-border:  rgba(52, 211, 153, 0.3);
+
+  --blue:          #60a5fa;
+  --blue-soft:     rgba(96, 165, 250, 0.1);
+  --blue-border:   rgba(96, 165, 250, 0.3);
+
+  --purple:        #a78bfa;
+  --purple-soft:   rgba(167, 139, 250, 0.1);
+  --purple-border: rgba(167, 139, 250, 0.3);
+
+  --shadow-navbar: 0 1px 0 rgba(0,0,0,0.4);
+  --shadow-sidebar:2px 0 16px rgba(0,0,0,0.3);
+  --shadow-canvas: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
+  --canvas-border: rgba(255,255,255,0.06);
+}
+
+.light {
+  --bg-app:        #f1f5f9;
+  --bg-navbar:     #ffffff;
+  --bg-sidebar:    #1e1e30;
+  --bg-sidebar-hover: #2a2a40;
+  --bg-sidebar-active: #32324e;
+  --bg-editor:     #e8edf5;
+  --bg-canvas:     #ffffff;
+
+  --border-subtle: #2a2a40;
+  --border-btn:    transparent;
+
+  --text-brand:    #818cf8;
+  --text-nav:      #1e293b;
+  --text-label:    #4b5563;
+  --text-btn:      #94a3b8;
+  --text-btn-hover:#e2e8f0;
+
+  --accent-blue:   #6366f1;
+  --accent-blue-soft: rgba(99, 102, 241, 0.12);
+  --accent-blue-border: rgba(99, 102, 241, 0.35);
+
+  --green:         #34d399;
+  --green-soft:    rgba(52, 211, 153, 0.1);
+  --green-border:  rgba(52, 211, 153, 0.3);
+
+  --blue:          #60a5fa;
+  --blue-soft:     rgba(96, 165, 250, 0.1);
+  --blue-border:   rgba(96, 165, 250, 0.3);
+
+  --purple:        #a78bfa;
+  --purple-soft:   rgba(167, 139, 250, 0.1);
+  --purple-border: rgba(167, 139, 250, 0.3);
+
+  --shadow-navbar: 0 1px 0 #e2e8f0, 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-sidebar:2px 0 16px rgba(0,0,0,0.18);
+  --shadow-canvas: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --canvas-border: #e2e8f0;
+}
+
+/* ── Root & Layout ───────────────────────────────────────── */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg-app);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  transition: background 0.25s;
+}
+
+/* ── Navbar ──────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 20px;
+  background: var(--bg-navbar);
+  box-shadow: var(--shadow-navbar);
+  z-index: 20;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-nav);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: color 0.25s;
+}
+
+.navbar-brand svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: var(--accent-blue-soft);
+  border: 1px solid var(--accent-blue-border);
+  border-radius: 20px;
+  color: var(--accent-blue);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.theme-toggle svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-blue);
+}
+
+/* ── App Layout (below navbar) ───────────────────────────── */
+.app-layout {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Toolbar (left sidebar) ──────────────────────────────── */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  width: 104px;
+  min-width: 104px;
+  height: 100%;
+  background: var(--bg-sidebar);
+  padding: 14px 8px 20px;
+  gap: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: var(--shadow-sidebar);
+  z-index: 10;
+  scrollbar-width: thin;
+  scrollbar-color: #2e2e42 transparent;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.toolbar::-webkit-scrollbar { width: 4px; }
+.toolbar::-webkit-scrollbar-track { background: transparent; }
+.toolbar::-webkit-scrollbar-thumb { background: #2e2e42; border-radius: 4px; }
+
+.toolbar-brand {
+  color: var(--text-brand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+  padding: 4px 0 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* ── Tool Groups ─────────────────────────────────────────── */
+.toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.toolbar-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.toolbar-group-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-label);
+  padding: 2px 6px 5px;
+}
+
+/* ── Tool Buttons ────────────────────────────────────────── */
+.tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 9px 6px;
+  background: transparent;
+  border: 1px solid var(--border-btn);
+  border-radius: 8px;
+  color: var(--text-btn);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+}
+
+.tool-btn.active {
+  background: #6d5dfc;
+  color: white;
+  border-color: #6d5dfc;
+}
+
+.tool-btn svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+.tool-btn:hover {
+  background: var(--bg-sidebar-hover);
+  color: var(--text-btn-hover);
+  border-color: #3a3a56;
+}
+
+.tool-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.tool-btn:active {
+  background: var(--bg-sidebar-active);
+  transform: scale(0.96);
+}
+
+.tool-btn--active {
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+  border-color: var(--accent-blue-border);
+}
+
+.tool-btn--active:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.upload-btn {
+  cursor: pointer;
+}
+
+.upload-btn input {
+  display: none;
+}
+
+/* Apply Crop — green, most prominent */
+.apply-crop-btn {
+  color: var(--green);
+  border-color: var(--green-border);
+  background: var(--green-soft);
+  font-weight: 600;
+}
+
+.apply-crop-btn:hover {
+  background: rgba(52, 211, 153, 0.18);
+  color: #6ee7b7;
+  border-color: var(--green);
+}
+
+/* Export PNG — indigo accent */
+.export-btn {
+  color: var(--blue);
+  border-color: var(--blue-border);
+  background: var(--blue-soft);
+  font-weight: 600;
+}
+
+.export-btn:hover {
+  background: rgba(96, 165, 250, 0.18);
+  color: #93c5fd;
+  border-color: var(--blue);
+}
+
+/* Export JSON — purple accent */
+.export-json-btn {
+  color: var(--purple);
+  border-color: var(--purple-border);
+  background: var(--purple-soft);
+  font-weight: 600;
+}
+
+.export-json-btn:hover {
+  background: rgba(167, 139, 250, 0.18);
+  color: #c4b5fd;
+  border-color: var(--purple);
+}
+
+/* ── Editor Area ─────────────────────────────────────────── */
+.editor-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 28px;
+  background: var(--bg-editor);
+  transition: background 0.25s;
+}
+
+.canvas-wrapper {
+  background: var(--bg-canvas);
+  border-radius: 10px;
+  box-shadow: var(--shadow-canvas);
+  overflow: hidden;
+  line-height: 0;
+  border: 1px solid var(--canvas-border);
+  transition: box-shadow 0.25s;
+}
+
+#canvas {
+  display: block;
+}
