@@ -23,7 +23,9 @@ const useHistory = (
     if (isRestoringRef.current) return;
 
     const entry: HistoryEntry = {
-      json: JSON.stringify(currentCanvas.toJSON(['src', 'crossOrigin'])),
+      json: JSON.stringify(
+        currentCanvas.toObject(['src', 'crossOrigin'])
+      ),
       width: currentCanvas.getWidth(),
       height: currentCanvas.getHeight(),
     };
@@ -46,7 +48,9 @@ const useHistory = (
     if (!canvas) return;
 
     const initialEntry: HistoryEntry = {
-      json: JSON.stringify(canvas.toJSON(['src', 'crossOrigin'])),
+      json: JSON.stringify(
+        canvas.toObject(['src', 'crossOrigin'])
+      ),
       width: canvas.getWidth(),
       height: canvas.getHeight(),
     };
